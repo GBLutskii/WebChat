@@ -55,3 +55,7 @@ SQL БД (желательно Postgresql)
          http://localhost:5242/Clients/Sender  
          http://localhost:5242/Clients/Recipient  
          http://localhost:5242/Clients/History
+
+6. To run docker image: clone the repository and execute this command from the root folder:  
+```bash
+docker-compose up -d --build
