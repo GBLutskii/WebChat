@@ -1,0 +1,16 @@
+<h2>Send Message</h2>
+<input id="text" maxlength="128" />
+<input id="sequence" type="number" value="1" />
+<button onclick="sendMessage()">Send</button>
+
+<script>
+    async function sendMessage() {
+        const text = document.getElementById('text').value;
+        const sequence = document.getElementById('sequence').value;
+        await fetch('/api/messages/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, sequenceNumber: parseInt(sequence) })
+        });
+    }
+</script>

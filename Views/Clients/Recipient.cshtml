@@ -1,0 +1,12 @@
+<h2>Real-time Messages</h2>
+<div id="messages"></div>
+
+<script>
+    const ws = new WebSocket('ws://localhost:5242/ws');
+    ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        const div = document.createElement('div');
+        div.textContent = `${message.timestamp}: ${message.text} (Seq: ${message.sequenceNumber})`;
+        document.getElementById('messages').appendChild(div);
+    };
+</script>
