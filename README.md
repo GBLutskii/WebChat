@@ -50,7 +50,7 @@ SQL БД (желательно Postgresql)
 4. Start the app:
     ```bash
     dotnet run
-5. Visit:
+5. Visit:  
          http://localhost:5242/swagger  
          http://localhost:5242/Clients/Sender  
          http://localhost:5242/Clients/Recipient  
