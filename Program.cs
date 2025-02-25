@@ -22,18 +22,11 @@ builder.Services.AddSwaggerGen(s =>
     s.SwaggerDoc("v1", new OpenApiInfo { Title = "WebChat API", Version = "v1" });
 });
 
-// builder.Services.AddDbContext<RootContext>(builder =>
-// {
-//     builder.UseNpgsql("User ID=postgres;Password=12345;Host=localhost;Port=5432;Database=Web_Chat;");
-//     builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-// });
-
 builder.Services.AddDbContext<RootContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-await Task.Delay(5000);
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<RootContext>();
@@ -60,10 +53,5 @@ app.UseEndpoints(ep =>
     ep.MapControllers();
     ep.MapControllerRoute(name: "default", pattern: "{controller=Clients}/{action=Index}/{id?}");
 });
-
-// var scope = app.Services.CreateScope();
-// var migrationContext = scope.ServiceProvider.GetRequiredService<RootContext>();
-// await migrationContext.Database.MigrateAsync();
-// scope.Dispose();
 
 app.Run();

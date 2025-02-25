@@ -5,7 +5,7 @@
     async function loadHistory() {
         const end = new Date();
         const start = new Date(end.getTime() - 10 * 60 * 1000);
-        const response = await fetch(`/api/messages/history?start=${start.toISOString()}&end=${end.toISOString()}`);
+        const response = await fetch(`/api/messages/historyTime?start=${start.toISOString()}&end=${end.toISOString()}`);
         const messages = await response.json();
         const historyDiv = document.getElementById('history');
         messages.forEach(m => {

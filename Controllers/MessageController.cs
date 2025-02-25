@@ -50,6 +50,20 @@ public class MessageController : ControllerBase
     }
     
     [HttpGet("history")]
+    public IActionResult GetMessageHistory([FromQuery] DateOnly start, [FromQuery] DateOnly end)
+    {
+        var messages = _context.Messages
+            .Where(msg => DateOnly.FromDateTime(msg.TimeSent) >= start && DateOnly.FromDateTime(msg.TimeSent) <= end)
+            .OrderBy(msg => msg.TimeSent)
+            .ToList();
+
+        _logger.LogInformation("Retrieved {Count} messages for range {Start} to {End}", messages.Count, start, end);
+        
+        return Ok(messages);
+    }
+    
+    [HttpGet("historyTime")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult GetMessageHistory([FromQuery] DateTime start, [FromQuery] DateTime end)
     {
         var messages = _context.Messages
